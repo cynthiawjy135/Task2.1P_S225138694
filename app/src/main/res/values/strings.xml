@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Task2.1P_S225138694</string>
+    <string-array name="source_array">
+        <item>USD</item>
+        <item>mpg</item>
+        <item>Gallon</item>
+        <item>Nautical Mile</item>
+        <item>Celcius</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+    <string-array name="destination_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
 </resources>
