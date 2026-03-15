@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        //Function to change the destination_spinner choices based on the source_spinner selected item
         spinnerSource.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
