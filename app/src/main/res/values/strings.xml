@@ -6,18 +6,40 @@
         <item>Gallon</item>
         <item>Nautical Mile</item>
         <item>Celcius</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>Fahrenheit</item>
     </string-array>
     <string-array name="destination_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>AUD</item>
+        <item>EUR</item>
+        <item>JPY</item>
+        <item>GBP</item>
+        <item>km/L</item>
+        <item>Liters</item>
+        <item>Kilometers</item>
+        <item>Fahrenheit</item>
+        <item>Celcius</item>
+        <item>Kelvin</item>
+    </string-array>
+    <string-array name="currency_array">
+        <item>AUD</item>
+        <item>EUR</item>
+        <item>JPY</item>
+        <item>GBP</item>
+    </string-array>
+    <string-array name="fuel_kmL_array">
+        <item>km/L</item>
+    </string-array>
+    <string-array name="fuel_L_array">
+        <item>Liters</item>
+    </string-array>
+    <string-array name="fuel_km_array">
+        <item>Kilometers</item>
+    </string-array>
+    <string-array name="temp_fromCelcius_array">
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+    <string-array name="temp_fromFahrenheit_array">
+        <item>Celcius</item>
     </string-array>
 </resources>
