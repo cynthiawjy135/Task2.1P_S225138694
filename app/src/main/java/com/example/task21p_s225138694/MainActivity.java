@@ -1,10 +1,14 @@
 package com.example.task21p_s225138694;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,13 +16,26 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    EditText editTxtValue;
+    Button btnConvert;
+    TextView txtViewResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        //Connect the element objects to the res object
+        editTxtValue  = findViewById((R.id.edittxt_value));
+        btnConvert    = findViewById((R.id.btn_convert));
+        txtViewResult = findViewById(R.id.txtview_result);
 
         //SOURCE SPINNER
         Spinner spinnerSource = (Spinner) findViewById(R.id.spinner_source);
@@ -36,11 +53,7 @@ public class MainActivity extends AppCompatActivity {
         //DESTINATION SPINNER
         Spinner spinnerDestination = (Spinner) findViewById(R.id.spinner_destination);
         // Create an ArrayAdapter using the string array and a default spinner layout.
-        ArrayAdapter<CharSequence> adapter_dest = ArrayAdapter.createFromResource(
-                this,
-                R.array.destination_array,
-                android.R.layout.simple_spinner_item
-        );
+        final ArrayAdapter<String> adapter_dest = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
         // Specify the layout to use when the list of choices appears.
         adapter_dest.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner.
@@ -57,55 +70,75 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = parent.getItemAtPosition(position).toString();
-                ArrayAdapter<CharSequence> adapter;
+                adapter_dest.clear();
 
                 if (selected.equals("USD")) {
-                    adapter = ArrayAdapter.createFromResource(
-                            MainActivity.this,
-                            R.array.currency_array,
-                            android.R.layout.simple_spinner_item
-                    );
+                    List<String> items = Arrays.asList(getResources().getStringArray(R.array.currency_array));
+                    adapter_dest.addAll(items);
                 } else if (selected.equals("mpg")) {
-                    adapter = ArrayAdapter.createFromResource(
-                            MainActivity.this,
-                            R.array.fuel_kmL_array,
-                            android.R.layout.simple_spinner_item
-                    );
+                    List<String> items = Arrays.asList(getResources().getStringArray(R.array.fuel_kmL_array));
+                    adapter_dest.addAll(items);
                 } else if (selected.equals("Gallon")) {
-                    adapter = ArrayAdapter.createFromResource(
-                            MainActivity.this,
-                            R.array.fuel_L_array,
-                            android.R.layout.simple_spinner_item
-                    );
+                    List<String> items = Arrays.asList(getResources().getStringArray(R.array.fuel_L_array));
+                    adapter_dest.addAll(items);
                 } else if (selected.equals("Nautical Mile")) {
-                    adapter = ArrayAdapter.createFromResource(
-                            MainActivity.this,
-                            R.array.fuel_km_array,
-                            android.R.layout.simple_spinner_item
-                    );
+                    List<String> items = Arrays.asList(getResources().getStringArray(R.array.fuel_km_array));
+                    adapter_dest.addAll(items);
                 } else if (selected.equals("Celcius")) {
-                    adapter = ArrayAdapter.createFromResource(
-                            MainActivity.this,
-                            R.array.temp_fromCelcius_array,
-                            android.R.layout.simple_spinner_item
-                    );
+                    List<String> items = Arrays.asList(getResources().getStringArray(R.array.temp_fromCelcius_array));
+                    adapter_dest.addAll(items);
                 }
                 else {
-                    adapter = ArrayAdapter.createFromResource(
-                            MainActivity.this,
-                            R.array.temp_fromFahrenheit_array,
-                            android.R.layout.simple_spinner_item
-                    );
+                    //If user choose fahrenheit in the source spinner
+                    List<String> items = Arrays.asList(getResources().getStringArray(R.array.temp_fromFahrenheit_array));
+                    adapter_dest.addAll(items);
                 }
 
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerDestination.setAdapter(adapter);
+                adapter_dest.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerDestination.setAdapter(adapter_dest);
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        btnConvert.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Log.d("BUTTONS", "Convert !");
+
+                String source = spinnerSource.getSelectedItem().toString();
+                String dest = spinnerDestination.getSelectedItem().toString();
+                float valueFromUser =  Float.parseFloat(editTxtValue.getText().toString());
+
+                if(source.equals("USD") && dest.equals("AUD")){
+                    float res = (float) (valueFromUser * 1.55);
+                    txtViewResult.setText(String.valueOf(res));
+                }else if(source.equals("USD") && dest.equals("EUR")){
+                    float res = (float) (valueFromUser * 0.92);
+                    txtViewResult.setText(String.valueOf(res));
+                }else if(source.equals("USD") && dest.equals("JPY")){
+                    float res = (float) (valueFromUser * 148.50);
+                    txtViewResult.setText(String.valueOf(res));
+                }else if(source.equals("mpg") && dest.equals("km/L")){
+                    float res = (float) (valueFromUser * 0.425);
+                    txtViewResult.setText(String.valueOf(res));
+                }else if(source.equals("Nautical Mile") && dest.equals("Kilometers")){
+                    float res = (float) (valueFromUser * 1.852);
+                    txtViewResult.setText(String.valueOf(res));
+                }else if(source.equals("Celcius") && dest.equals("Fahrenheit")){
+                    float res = (float) ((valueFromUser * 1.8) + 32);
+                    txtViewResult.setText(String.valueOf(res));
+                }else if(source.equals("Celcius") && dest.equals("Kelvin")){
+                    float res = (float) (valueFromUser + 273.15);
+                    txtViewResult.setText(String.valueOf(res));
+                } else{
+                    //Fahrenheit to Celcius
+                    float res = (float) ((valueFromUser - 32) / 1.8 );
+                    txtViewResult.setText(String.valueOf(res));
+                }
             }
         });
     }
