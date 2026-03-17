@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -111,34 +112,58 @@ public class MainActivity extends AppCompatActivity {
 
                 String source = spinnerSource.getSelectedItem().toString();
                 String dest = spinnerDestination.getSelectedItem().toString();
-                float valueFromUser =  Float.parseFloat(editTxtValue.getText().toString());
+                String acceptedInput = editTxtValue.getText().toString().trim();
+                double valueFromUser;
 
-                if(source.equals("USD") && dest.equals("AUD")){
-                    float res = (float) (valueFromUser * 1.55);
-                    txtViewResult.setText(String.valueOf(res));
-                }else if(source.equals("USD") && dest.equals("EUR")){
-                    float res = (float) (valueFromUser * 0.92);
-                    txtViewResult.setText(String.valueOf(res));
-                }else if(source.equals("USD") && dest.equals("JPY")){
-                    float res = (float) (valueFromUser * 148.50);
-                    txtViewResult.setText(String.valueOf(res));
-                }else if(source.equals("mpg") && dest.equals("km/L")){
-                    float res = (float) (valueFromUser * 0.425);
-                    txtViewResult.setText(String.valueOf(res));
-                }else if(source.equals("Nautical Mile") && dest.equals("Kilometers")){
-                    float res = (float) (valueFromUser * 1.852);
-                    txtViewResult.setText(String.valueOf(res));
-                }else if(source.equals("Celcius") && dest.equals("Fahrenheit")){
-                    float res = (float) ((valueFromUser * 1.8) + 32);
-                    txtViewResult.setText(String.valueOf(res));
-                }else if(source.equals("Celcius") && dest.equals("Kelvin")){
-                    float res = (float) (valueFromUser + 273.15);
-                    txtViewResult.setText(String.valueOf(res));
+                if(acceptedInput.isEmpty()){
+                    Toast.makeText(MainActivity.this, "Input cannot be empty!", Toast.LENGTH_SHORT).show();
                 } else{
-                    //Fahrenheit to Celcius
-                    float res = (float) ((valueFromUser - 32) / 1.8 );
-                    txtViewResult.setText(String.valueOf(res));
+
+                    try {
+                        valueFromUser = Double.parseDouble(acceptedInput);
+
+                        if ((source.equals("mpg") ||
+                                source.equals("Nautical Mile") ||
+                                source.equals("Gallon") ||
+                                source.equals("USD")) && valueFromUser < 0) {
+                            Toast.makeText(MainActivity.this, "Value cannot be negative!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if(source.equals("USD") && dest.equals("AUD")){
+                            double res = (valueFromUser * 1.55);
+                            txtViewResult.setText(String.valueOf(res));
+                        }else if(source.equals("USD") && dest.equals("EUR")){
+                            double res = (valueFromUser * 0.92);
+                            txtViewResult.setText(String.valueOf(res));
+                        }else if(source.equals("USD") && dest.equals("JPY")){
+                            double res = (valueFromUser * 148.50);
+                            txtViewResult.setText(String.valueOf(res));
+                        }else if(source.equals("mpg") && dest.equals("km/L")){
+                            double res = (valueFromUser * 0.425);
+                            txtViewResult.setText(String.valueOf(res));
+                        }else if(source.equals("Nautical Mile") && dest.equals("Kilometers")){
+                            double res = (valueFromUser * 1.852);
+                            txtViewResult.setText(String.valueOf(res));
+                        }else if(source.equals("Celcius") && dest.equals("Fahrenheit")){
+                            double res = ((valueFromUser * 1.8) + 32);
+                            txtViewResult.setText(String.valueOf(res));
+                        }else if(source.equals("Celcius") && dest.equals("Kelvin")){
+                            double res = (valueFromUser + 273.15);
+                            txtViewResult.setText(String.valueOf(res));
+                        } else{
+                            //Fahrenheit to Celcius
+                            double res = ((valueFromUser - 32) / 1.8 );
+                            txtViewResult.setText(String.valueOf(res));
+                        }
+                    }catch (NumberFormatException e) {
+                        Toast.makeText(MainActivity.this, "Input must be number!", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
+
+
             }
         });
     }
