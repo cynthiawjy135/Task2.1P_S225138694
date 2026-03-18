@@ -142,6 +142,9 @@ public class MainActivity extends AppCompatActivity {
                         }else if(source.equals("mpg") && dest.equals("km/L")){
                             double res = (valueFromUser * 0.425);
                             txtViewResult.setText(String.valueOf(res));
+                        }else if(source.equals("Gallon") && dest.equals("Liters")){
+                            double res = (valueFromUser * 3.785);
+                            txtViewResult.setText(String.valueOf(res));
                         }else if(source.equals("Nautical Mile") && dest.equals("Kilometers")){
                             double res = (valueFromUser * 1.852);
                             txtViewResult.setText(String.valueOf(res));

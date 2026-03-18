@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFBF"
     tools:context=".MainActivity">
 
     <TextView
@@ -15,9 +16,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.556" />
+        app:layout_constraintVertical_bias="0.742" />
 
     <TextView
         android:id="@+id/txtview_title"
@@ -39,30 +41,24 @@
         android:id="@+id/spinner_source"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="83dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="52dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/edittxt_value"
-        app:layout_constraintEnd_toStartOf="@+id/txtview_arrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtview_title"
-        app:layout_constraintVertical_bias="0.433" />
+        app:layout_constraintTop_toBottomOf="@+id/txtview_title" />
 
     <Spinner
         android:id="@+id/spinner_destination"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="83dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="44dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_convert"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtview_arrow"
-        app:layout_constraintTop_toBottomOf="@+id/txtview_title"
-        app:layout_constraintVertical_bias="0.451" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtview_arrow" />
 
     <Button
         android:id="@+id/btn_convert"
@@ -76,14 +72,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edittxt_value"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.355" />
 
     <EditText
         android:id="@+id/edittxt_value"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="436dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:hint="30"
@@ -97,18 +93,17 @@
         android:id="@+id/txtview_arrow"
         android:layout_width="25dp"
         android:layout_height="48dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="88dp"
-        android:foregroundGravity="center"
-        android:gravity="center_vertical"
-        android:text="=>"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="193dp"
+        android:gravity="center_horizontal"
+        android:text="To"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/edittxt_value"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_destination"
-        app:layout_constraintStart_toEndOf="@+id/spinner_source"
-        app:layout_constraintTop_toBottomOf="@+id/txtview_title"
-        app:layout_constraintVertical_bias="0.371" />
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_source" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
